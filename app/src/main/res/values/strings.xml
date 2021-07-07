@@ -1,0 +1,5 @@
+<resources>
+    <string name="navigation_drawer_open">Open Navigation bar</string>
+    <string name="navigation_drawer_close">Close Navigation bar</string>
+    <string name="app_name">Chlorophyll APP</string>
+</resources>

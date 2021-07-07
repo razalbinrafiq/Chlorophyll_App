@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "2037708915",
+    "firebase_url": "https://nodewithfirebase-9ad44-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "nodewithfirebase-9ad44",
+    "storage_bucket": "nodewithfirebase-9ad44.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2037708915:android:726762a6a54edc55609206",
+        "android_client_info": {
+          "package_name": "com.example.chlorophyll"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2037708915-4ik16vpqj5p0hdq713hlnj099kbr0e3a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBo3v2nZTkap5whN5FmOrGLf9g0XGwg6Js"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2037708915-4ik16vpqj5p0hdq713hlnj099kbr0e3a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2037708915:android:12fa36a731f0bdbc609206",
+        "android_client_info": {
+          "package_name": "com.example.clorofill_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2037708915-4ik16vpqj5p0hdq713hlnj099kbr0e3a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBo3v2nZTkap5whN5FmOrGLf9g0XGwg6Js"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2037708915-4ik16vpqj5p0hdq713hlnj099kbr0e3a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
