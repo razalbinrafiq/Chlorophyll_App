@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -138,7 +139,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
                     SharedPreferences loginDetails =  getSharedPreferences("loginDetails", MODE_PRIVATE);
                     String type= loginDetails.getString("type","0");
 
-                    if(getProductType.equals("plant")){
+                    if(getProductType.equals("pot")){
                         postFixTo=" grams";
 
 
@@ -185,26 +186,119 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
 
 
 
+    public void plants(String name,String amount, String date,String id,String shareId, String number){
+
+
+        userListOfHomePage = new ArrayList<>();
+
+
+        DatabaseReference fb_to_read = FirebaseDatabase.getInstance().getReference("product");
+
+        fb_to_read.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                List<String> list=new ArrayList<String>();
+                for (DataSnapshot dsp : snapshot.getChildren()){
+                    list.add(String.valueOf(dsp.getKey()));
+                }
+
+                for(final String data:list){
+
+
+                    // String status=snapshot.child(data).child("status").getValue(String.class);
+
+                    //                mLayout.addView(dmv.slnoTextVIew(getApplicationContext(),"data"),i);
+                    //               mLayout.addView(dmv.chittalIDTextView(getApplicationContext(), "f"),i+1);
+                    //                mLayout.addView(dmv.nameTextVIew(getApplicationContext(),data),i);
+
+
+                    String getProductName=snapshot.child(data).child("name").getValue(String.class);
+                    String getProductPrice=snapshot.child(data).child("price").getValue(String.class);
+                    getCurrentNum=data;
+                    String getProductType=snapshot.child(data).child("type").getValue(String.class);
+                    String getProductQuantity=snapshot.child(data).child("quantity").getValue(String.class);
+
+
+                    String postFixTo;
+
+                    SharedPreferences loginDetails =  getSharedPreferences("loginDetails", MODE_PRIVATE);
+                    String type= loginDetails.getString("type","0");
+
+                    if(getProductType.equals("plant")){
+                        postFixTo=" grams";
+
+
+                        i=i+1;
+
+                        userListOfHomePage.add(new ModelClassOfHomePage(R.drawable.ch3, getProductName, getProductPrice, getProductQuantity, "3", data.toString(), String.valueOf(i)));
 
 
 
+                    }
+//                    else {
+//                        postFixTo=" %";
+//                        if(getShareId.equals(user)){
+//
+//                            i=i+1;
+//
+//                            userListOfHomePage.add(new ModelClassOfHomePage(R.drawable.ch4, getShareDate, getShareName, getSharePercentage+postFixTo, "3", data.toString(), String.valueOf(i)));
+//
+//                        }
+//
+//
+//                    }
 
 
+
+                    initRecyclerView();
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+
+
+
+    public void logout(){
+
+        SharedPreferences loginDetails = getSharedPreferences("loginDetails", MODE_PRIVATE);
+        SharedPreferences.Editor editor = loginDetails.edit();
+        editor.putString("id","0" );
+        editor.putString("password","0" );
+        editor.putString("mode","0" );
+        editor.commit();
+
+        Intent login=new Intent(homepage.this,MainActivity.class);
+        finish();
+        startActivity(login);
+        System.exit(0);
+
+    }
 
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()){
-            case R.id.nav_khome:
+            case R.id.nav_khome:initData("1,","2","2,3","4,","5","67");
                 Toast.makeText(this, "clicked here", Toast.LENGTH_SHORT).show();
 
                 break;
-            case R.id.nav_farmers_registration:
+            case R.id.nav_farmers_registration:plants("1,","2","2,3","4,","5","67");
                 Toast.makeText(this, "mail_clicked second irem", Toast.LENGTH_SHORT).show();
                break;
 
-            case R.id.nav_profile:
+            case R.id.nav_profile:plants("1,","2","2,3","4,","5","67");
                 Toast.makeText(this, "clicked here", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_product_to_sell:
@@ -214,7 +308,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.nav_mail:
                 Toast.makeText(this, "mail_clicked", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.Log:
+            case R.id.Log:logout();
 
                 break;
         }

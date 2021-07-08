@@ -93,7 +93,7 @@ public class log extends  AppCompatActivity {
                                                     editor.putString("mode","user" );
                                                     editor.commit();
 
-                                                    Intent login=new Intent(com.example.clorofill_app.log.this,UserActivity.class);
+                                                    Intent login=new Intent(com.example.clorofill_app.log.this,homepage.class);
                                                     login.putExtra("user_id",user_id);
                                                     startActivity(login);
                                                     finish();
