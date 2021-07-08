@@ -6,14 +6,55 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    RecyclerView recyclerView;
+    LinearLayoutManager layoutManager;
+    List<ModelClassOfHomePage> userListOfHomePage;
+    AdapterOfHomePage adapter;
+
+
+    private GridLayout mLayout;
+    Button addShareButton,test;
+    int i=2;
+    int num=1;
+    int count;
+    Context context;
+    Button button;
+    FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+    DatabaseReference getRef1,getRef2;
+    String sharenameEditText,sharedateEditText,shareamountEditText;
+    String numOfShares;
+    EditText shareProfit,sharedate,shareamount;
+    String getShareName,getCurrentNum;
+    String user = null;
+    String nameOfShop = null;
+    String addTo;
+
+
+
     private DrawerLayout drawerLayout;
 
     @Override
@@ -34,7 +75,122 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         ActionBarDrawerToggle toggle= new ActionBarDrawerToggle(this,drawerLayout,toolbars,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+
+
+        initData("1,","2","2,3","4,","5","67");
+
     }
+
+
+
+
+
+
+    private void initRecyclerView() {
+
+        recyclerView=findViewById(R.id.recyclerViewOfAdminActivity);
+        layoutManager=new LinearLayoutManager(this);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter=new AdapterOfHomePage(userListOfHomePage);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+    }
+
+    private void initData(String name,String amount, String date,String id,String shareId, String number) {
+
+
+        userListOfHomePage = new ArrayList<>();
+
+
+        DatabaseReference fb_to_read = FirebaseDatabase.getInstance().getReference("product");
+
+        fb_to_read.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                List<String> list=new ArrayList<String>();
+                for (DataSnapshot dsp : snapshot.getChildren()){
+                    list.add(String.valueOf(dsp.getKey()));
+                }
+
+                for(final String data:list){
+
+
+                   // String status=snapshot.child(data).child("status").getValue(String.class);
+
+                    //                mLayout.addView(dmv.slnoTextVIew(getApplicationContext(),"data"),i);
+                    //               mLayout.addView(dmv.chittalIDTextView(getApplicationContext(), "f"),i+1);
+                    //                mLayout.addView(dmv.nameTextVIew(getApplicationContext(),data),i);
+
+
+                    String getProductName=snapshot.child(data).child("name").getValue(String.class);
+                    String getProductPrice=snapshot.child(data).child("price").getValue(String.class);
+                    getCurrentNum=data;
+                    String getProductType=snapshot.child(data).child("type").getValue(String.class);
+                    String getProductQuantity=snapshot.child(data).child("quantity").getValue(String.class);
+
+
+                    String postFixTo;
+
+                    SharedPreferences loginDetails =  getSharedPreferences("loginDetails", MODE_PRIVATE);
+                    String type= loginDetails.getString("type","0");
+
+                    if(getProductType.equals("plant")){
+                        postFixTo=" grams";
+
+
+                            i=i+1;
+
+                            userListOfHomePage.add(new ModelClassOfHomePage(R.drawable.ch3, getProductName, getProductPrice, getProductQuantity, "3", data.toString(), String.valueOf(i)));
+
+
+
+                    }
+//                    else {
+//                        postFixTo=" %";
+//                        if(getShareId.equals(user)){
+//
+//                            i=i+1;
+//
+//                            userListOfHomePage.add(new ModelClassOfHomePage(R.drawable.ch4, getShareDate, getShareName, getSharePercentage+postFixTo, "3", data.toString(), String.valueOf(i)));
+//
+//                        }
+//
+//
+//                    }
+
+
+
+                    initRecyclerView();
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

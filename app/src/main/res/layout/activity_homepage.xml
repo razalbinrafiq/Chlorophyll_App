@@ -5,9 +5,41 @@
     android:id="@+id/F_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="11"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
     tools:context=".homepage">
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       android:paddingTop="50dp"
+        android:id="@+id/scroll_view">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".homepage">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                android:id="@+id/recyclerViewOfAdminActivity"/>
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

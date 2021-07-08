@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+        <RelativeLayout
+            android:id="@+id/recyclerViewOfAdminActivity"
+            android:layout_width="match_parent"
+            android:layout_height="95dp"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/imageView"
+                app:cardCornerRadius="60dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/imageView1"
+                    android:src="@drawable/icon">
+
+                </ImageView>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:id="@+id/nameTextView"
+                android:text="Name"
+                android:fontFamily="sans-serif-black"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:layout_toRightOf="@id/imageView"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="25dp"
+                android:id="@+id/amountTextView"
+                android:text="Amount"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_toRightOf="@id/nameTextView"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="70dp">
+
+            </TextView>
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="25dp"
+                android:id="@+id/dateTextView"
+                android:text="Valid till "
+                android:textSize="15sp"
+                android:layout_toRightOf="@+id/imageView"
+                android:layout_below="@id/nameTextView"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp">
+
+            </TextView>
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="25dp"
+                android:id="@+id/idTextView"
+                android:visibility="invisible">
+
+            </TextView>
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="25dp"
+                android:id="@+id/numberTextView"
+                android:visibility="invisible">
+
+            </TextView>
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="25dp"
+                android:id="@+id/shareIdTextView"
+                android:visibility="invisible">
+
+            </TextView>
+
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
