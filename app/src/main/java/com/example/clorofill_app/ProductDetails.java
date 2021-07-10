@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +26,14 @@ public class ProductDetails extends AppCompatActivity {
 
 
     String productName,id;
+    ImageView productImage;
     TextView productNameTextView,totalAmountTextView,availableAmountTextView,descriptionTextView,deliveryTextView;
     EditText amountEditText;
     Button buyButton;
     String check_ID;
+    FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     DatabaseReference getRef1,getRef2;
+    String getItemName,getItemCount;
 
 
 
@@ -55,6 +60,8 @@ public class ProductDetails extends AppCompatActivity {
         deliveryTextView=(TextView)findViewById(R.id.deliveryTextView);
         amountEditText=(EditText) findViewById(R.id.amountEditText);
         buyButton=(Button) findViewById(R.id.buyButton);
+        productImage=(ImageView) findViewById(R.id.productImage);
+
 
 
 
@@ -76,12 +83,15 @@ public class ProductDetails extends AppCompatActivity {
                     String getProductType=snapshot.child("type").getValue(String.class);
                     String getProductQuantity=snapshot.child("quantity").getValue(String.class);
                     String getProductDescription=snapshot.child("description").getValue(String.class);
+                    String getProductImage=snapshot.child("image").getValue(String.class);
 
 
                     SharedPreferences loginDetails =  getSharedPreferences("loginDetails", MODE_PRIVATE);
                     String type= loginDetails.getString("type","0");
 
 
+
+                Picasso.get().load(getProductImage).fit().centerCrop().into(productImage);
 
                 productNameTextView.setText(getProductName);
                 totalAmountTextView.setText(getProductPrice);
@@ -102,14 +112,37 @@ public class ProductDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                getRef1 = FirebaseDatabase.getInstance().getReference("users/"+ check_ID+ "/itemsBoughtCount");
+
+                String itemName=productNameTextView.getText().toString();
+
+                getRef1 = FirebaseDatabase.getInstance().getReference("users/"+ check_ID+ "/cart");
                 getRef1.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                       int  num= (int) snapshot.getValue(Integer.class);
-                        num=num+1;
+                        List<String> list=new ArrayList<String>();
+                        for (DataSnapshot dsp : snapshot.getChildren()){
+                            list.add(String.valueOf(dsp.getKey()));
+                        }
 
-                    //    Toast.makeText(ProductDetails.this, String.valueOf(num), Toast.LENGTH_SHORT).show();
+
+
+                        for(final String data:list){
+
+                            Toast.makeText(ProductDetails.this, data.toString(), Toast.LENGTH_SHORT).show();
+
+                            getItemName=snapshot.child(data).child("itemName").getValue(String.class);
+                          if(data.equals(itemName)){
+
+                                getItemCount=snapshot.child(data).child("quantity").getValue(String.class);
+                              Toast.makeText(ProductDetails.this, String.valueOf(getItemCount), Toast.LENGTH_SHORT).show();
+                          }
+
+
+                        }
+
+
+
+
                     }
 
                     @Override
@@ -117,6 +150,17 @@ public class ProductDetails extends AppCompatActivity {
 
                     }
                 });
+
+
+
+
+                String cartPath="users/"+ check_ID+ "/cart/"+itemName;
+                String cartItemName="users/"+ check_ID+ "/cart/"+itemName+"/itemName";
+
+                DatabaseReference mDbRef1 = mDatabase.getReference(cartItemName);
+
+
+                mDbRef1.setValue(itemName);
 
 
 
