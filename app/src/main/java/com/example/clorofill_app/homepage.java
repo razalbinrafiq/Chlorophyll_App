@@ -131,6 +131,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
                     String getProductPrice=snapshot.child(data).child("price").getValue(String.class);
                     getCurrentNum=data;
                     String getProductType=snapshot.child(data).child("type").getValue(String.class);
+                    String im=snapshot.child(data).child("image").getValue(String.class);
                     String getProductQuantity=snapshot.child(data).child("quantity").getValue(String.class);
 
 
@@ -145,7 +146,8 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
 
                             i=i+1;
 
-                            userListOfHomePage.add(new ModelClassOfHomePage(R.drawable.ch3, getProductName, getProductPrice, getProductQuantity, "3", data.toString(), String.valueOf(i)));
+                          //  String im="https://firebasestorage.googleapis.com/v0/b/nodewithfirebase-9ad44.appspot.com/o/Products%2Fcactus-plants-500x500.jpg?alt=media&token=6bda95cc-37f6-44a7-b20b-ea7613f25424";
+                            userListOfHomePage.add(new ModelClassOfHomePage(im, getProductName, getProductPrice, getProductQuantity, "3", data.toString(), String.valueOf(i)));
 
 
 
@@ -218,7 +220,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
                     getCurrentNum=data;
                     String getProductType=snapshot.child(data).child("type").getValue(String.class);
                     String getProductQuantity=snapshot.child(data).child("quantity").getValue(String.class);
-
+                    String im=snapshot.child(data).child("image").getValue(String.class);
 
                     String postFixTo;
 
@@ -231,7 +233,8 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
 
                         i=i+1;
 
-                        userListOfHomePage.add(new ModelClassOfHomePage(R.drawable.ch3, getProductName, getProductPrice, getProductQuantity, "3", data.toString(), String.valueOf(i)));
+                      //  String im="https://firebasestorage.googleapis.com/v0/b/nodewithfirebase-9ad44.appspot.com/o/Products%2Fcactus-plants-500x500.jpg?alt=media&token=6bda95cc-37f6-44a7-b20b-ea7613f25424";
+                        userListOfHomePage.add(new ModelClassOfHomePage(im, getProductName, getProductPrice, getProductQuantity, "3", data.toString(), String.valueOf(i)));
 
 
 
@@ -269,6 +272,120 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
 
 
 
+    public void fertilizers(String name,String amount, String date,String id,String shareId, String number){
+
+
+        userListOfHomePage = new ArrayList<>();
+
+
+        DatabaseReference fb_to_read = FirebaseDatabase.getInstance().getReference("product");
+
+        fb_to_read.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                List<String> list=new ArrayList<String>();
+                for (DataSnapshot dsp : snapshot.getChildren()){
+                    list.add(String.valueOf(dsp.getKey()));
+                }
+
+                for(final String data:list){
+
+                    String getProductName=snapshot.child(data).child("name").getValue(String.class);
+                    String getProductPrice=snapshot.child(data).child("price").getValue(String.class);
+                    getCurrentNum=data;
+                    String getProductType=snapshot.child(data).child("type").getValue(String.class);
+                    String getProductQuantity=snapshot.child(data).child("quantity").getValue(String.class);
+                    String im=snapshot.child(data).child("image").getValue(String.class);
+
+
+                    SharedPreferences loginDetails =  getSharedPreferences("loginDetails", MODE_PRIVATE);
+                    String type= loginDetails.getString("type","0");
+
+                    if(getProductType.equals("fertilizers")){
+
+
+                        i=i+1;
+                        userListOfHomePage.add(new ModelClassOfHomePage(im, getProductName, getProductPrice, getProductQuantity, "3", data.toString(), String.valueOf(i)));
+
+
+                    }
+
+                    initRecyclerView();
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+
+    public void seeds(String name,String amount, String date,String id,String shareId, String number){
+
+
+        userListOfHomePage = new ArrayList<>();
+
+
+        DatabaseReference fb_to_read = FirebaseDatabase.getInstance().getReference("product");
+
+        fb_to_read.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                List<String> list=new ArrayList<String>();
+                for (DataSnapshot dsp : snapshot.getChildren()){
+                    list.add(String.valueOf(dsp.getKey()));
+                }
+
+                for(final String data:list){
+
+                    String getProductName=snapshot.child(data).child("name").getValue(String.class);
+                    String getProductPrice=snapshot.child(data).child("price").getValue(String.class);
+                    getCurrentNum=data;
+                    String getProductType=snapshot.child(data).child("type").getValue(String.class);
+                    String getProductQuantity=snapshot.child(data).child("quantity").getValue(String.class);
+                    String im=snapshot.child(data).child("image").getValue(String.class);
+
+
+                    SharedPreferences loginDetails =  getSharedPreferences("loginDetails", MODE_PRIVATE);
+                    String type= loginDetails.getString("type","0");
+
+                    if(getProductType.equals("seeds")){
+
+
+                        i=i+1;
+                        userListOfHomePage.add(new ModelClassOfHomePage(im, getProductName, getProductPrice, getProductQuantity, "3", data.toString(), String.valueOf(i)));
+
+
+                    }
+
+                    initRecyclerView();
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+
+
+
+
+
     public void logout(){
 
         SharedPreferences loginDetails = getSharedPreferences("loginDetails", MODE_PRIVATE);
@@ -294,14 +411,14 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
                 Toast.makeText(this, "clicked here", Toast.LENGTH_SHORT).show();
 
                 break;
-            case R.id.nav_farmers_registration:plants("1,","2","2,3","4,","5","67");
+            case R.id.nav_farmers_registration:fertilizers("1,","2","2,3","4,","5","67");
                 Toast.makeText(this, "mail_clicked second irem", Toast.LENGTH_SHORT).show();
                break;
 
             case R.id.nav_profile:plants("1,","2","2,3","4,","5","67");
                 Toast.makeText(this, "clicked here", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.nav_product_to_sell:
+            case R.id.nav_product_to_sell:seeds("1,","2","2,3","4,","5","67");
                 Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
                 break;
 

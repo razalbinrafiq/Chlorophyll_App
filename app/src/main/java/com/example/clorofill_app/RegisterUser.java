@@ -94,7 +94,7 @@ public class RegisterUser extends AppCompatActivity {
                                 DatabaseReference email = mDatabase.getReference(emailid);
                                 DatabaseReference mno = mDatabase.getReference(num);
                                 DatabaseReference Passwordpath = mDatabase.getReference(passwordpath);
-                                DatabaseReference shareCount = mDatabase.getReference( user_id + "/" + username + "/sharesBoughtCount");
+                                DatabaseReference shareCount = mDatabase.getReference( user_id + "/" + username + "/itemsBoughtCount");
 
                                 //DatabaseReference passw2 = mDatabase.getReference(password2);
 

@@ -2,7 +2,7 @@ package com.example.clorofill_app;
 
 public class ModelClassOfHomePage {
 
-        private int imageView1;
+        private String imageView1;
         private String nameTextView;
         private String amountTextView;
         private String dateTextView;
@@ -11,7 +11,7 @@ public class ModelClassOfHomePage {
         private String numberTextView;
 
 
-        ModelClassOfHomePage(int imageView1, String nameTextView,String amountTextView,String dateTextView, String idTextView,String shareIdTextView, String numberTextView){
+        ModelClassOfHomePage(String imageView1, String nameTextView,String amountTextView,String dateTextView, String idTextView,String shareIdTextView, String numberTextView){
 
             this.imageView1=imageView1;
             this.nameTextView=nameTextView;
@@ -24,7 +24,7 @@ public class ModelClassOfHomePage {
         }
 
 
-        public int getImageView1() {
+        public String getImageView1() {
             return imageView1;
         }
 

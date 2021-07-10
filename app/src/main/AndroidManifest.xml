@@ -9,20 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Clorofill_app">
-        <activity android:name=".homepage"  android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+        <activity android:name=".Cart"></activity>
+        <activity android:name=".ProductDetails" />
+        <activity
+            android:name=".homepage"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".ForgotPassword" />
         <activity android:name=".RegisterUser" />
         <activity android:name=".UserActivity" />
-        <activity android:name=".log" >            <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".log">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <category android:name="android.intent.category.LAUNCHER" />
-    </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

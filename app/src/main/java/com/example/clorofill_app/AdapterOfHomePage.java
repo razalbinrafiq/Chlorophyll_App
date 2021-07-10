@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class AdapterOfHomePage extends RecyclerView.Adapter<AdapterOfHomePage.ViewHolder> {
@@ -31,7 +33,7 @@ public class AdapterOfHomePage extends RecyclerView.Adapter<AdapterOfHomePage.Vi
     @Override
     public void onBindViewHolder(@NonNull AdapterOfHomePage.ViewHolder holder, int position) {
 
-        int resource= userListOfHomePage.get(position).getImageView1();
+        String resource= userListOfHomePage.get(position).getImageView1();
         String name=userListOfHomePage.get(position).getNameTextView();
         String amount=userListOfHomePage.get(position).getAmountTextView();
         String date=userListOfHomePage.get(position).getDateTextView();
@@ -50,11 +52,11 @@ public class AdapterOfHomePage extends RecyclerView.Adapter<AdapterOfHomePage.Vi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //holder.nameTextView.setText("UI");
-//                Context u=holder.itemView.getContext();
-//                Intent iu=new Intent(u,ParticularSharesBought.class);
-//                iu.putExtra("path",shareId);
-//                u.startActivity(iu);
+             //   holder.nameTextView.setText("UI");
+                Context u=holder.itemView.getContext();
+                Intent iu=new Intent(u,ProductDetails.class);
+                iu.putExtra("name",name);
+                u.startActivity(iu);
                 //Toast.makeText(u, holder.shareIdTextView.getText(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -90,9 +92,13 @@ public class AdapterOfHomePage extends RecyclerView.Adapter<AdapterOfHomePage.Vi
 
         }
 
-        public void setData(int resource, String name, String amount, String date, String id,String shareId, String number) {
+        public void setData(String resource, String name, String amount, String date, String id,String shareId, String number) {
 
-            imageView.setImageResource(resource);
+
+            Picasso.get().load(resource).fit().centerCrop().into(imageView);
+
+
+            //   imageView.setImageURI(resource);
             nameTextView.setText(name);
             amountTextView.setText(amount);
             dateTextView.setText(date);
