@@ -2,4 +2,6 @@
     <string name="navigation_drawer_open">Open Navigation bar</string>
     <string name="navigation_drawer_close">Close Navigation bar</string>
     <string name="app_name">Chlorophyll APP</string>
+    <string name="main_navi_item_home"><font size="22">Buy Now</font></string>
+    <string name="main_navi_item_amount"><font size="22">Amount</font></string>
 </resources>

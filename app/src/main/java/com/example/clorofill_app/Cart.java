@@ -5,10 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,8 +30,12 @@ public class Cart extends AppCompatActivity {
     AdapterOfCart adapter;
 
     int i=1;
+    int totalSum=0;
     String check_ID;
     String getItemName,getItemQuantity,getItemImage,getItemPrice;
+
+    TextView totalAmountTextView;
+    Button buyButton;
 
 
     @Override
@@ -34,10 +43,15 @@ public class Cart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
+        totalAmountTextView=(TextView)findViewById(R.id.totalAmountTextView);
+        buyButton=(Button) findViewById(R.id.buyButton);
+
         SharedPreferences loginDetails =  getSharedPreferences("loginDetails", MODE_PRIVATE);
         check_ID= loginDetails.getString("id","0");
 
-       initData("1,","2","2,3","4,","5","67");
+
+
+        initData("1,","2","2,3","4,","5","67");
     }
 
 
@@ -78,19 +92,23 @@ public class Cart extends AppCompatActivity {
                     getItemQuantity=snapshot.child(data).child("quantity").getValue(String.class);
                     getItemImage=snapshot.child(data).child("image").getValue(String.class);
                     getItemPrice=snapshot.child(data).child("price").getValue(String.class);
+
+                    totalSum=totalSum+Integer.parseInt(getItemPrice)*Integer.parseInt(getItemQuantity);
                   //  Toast.makeText(Cart.this, getItemPrice, Toast.LENGTH_SHORT).show();
 //                    String getShareType=snapshot.child(data).child("typeOfShop").getValue(String.class);
 //
 //                    if(getShareType.equals("Others")) {
                     i++;
-                      userListCart.add(new ModelClassOfCart(R.drawable.ch4, getItemName, " ₹ "+getItemPrice, getItemQuantity, getItemName, data.toString(), String.valueOf(i)));
+                      userListCart.add(new ModelClassOfCart(getItemImage, getItemName, " ₹ "+getItemPrice, getItemQuantity, getItemName, data.toString(), String.valueOf(i)));
 //                    }
 
 
 
                 }
 
-                  initRecyclerView();
+                initRecyclerView();
+                totalAmountTextView.setText("  ₹ "+String.valueOf(totalSum));
+
             }
 
             @Override

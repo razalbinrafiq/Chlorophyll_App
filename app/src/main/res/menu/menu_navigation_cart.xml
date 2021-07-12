@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/amount"
+        android:title="@string/main_navi_item_amount"
+       />
+    <item
+        android:id="@+id/buy"
+        android:title="@string/main_navi_item_home" />
+
+
+
+</menu>
