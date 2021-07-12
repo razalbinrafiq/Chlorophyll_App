@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<RelativeLayout
+    android:id="@+id/recyclerViewCart"
+    android:layout_width="match_parent"
+    android:layout_height="95dp"
+    >
+
+
+
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:id="@+id/nameTextView"
+        android:text="Name"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:id="@+id/amountTextView"
+        android:text="Price"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_below="@id/nameTextView"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp">
+
+    </TextView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/imageView"
+        app:cardCornerRadius="10dp"
+        android:layout_toRightOf="@+id/nameTextView"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="80dp">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            android:id="@+id/imageView1"
+            android:src="@drawable/ch5">
+
+        </ImageView>
+
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:id="@+id/dateTextView"
+        android:text="Qty"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_alignParentRight="true">
+
+    </TextView>
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="25dp"
+        android:id="@+id/idTextView"
+        android:visibility="invisible">
+
+    </TextView>
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="25dp"
+        android:id="@+id/numberTextView"
+        android:visibility="invisible">
+
+    </TextView>
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="25dp"
+        android:id="@+id/shareIdTextView"
+        android:text="Remove"
+        android:textColor="#ab0f2c"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/dateTextView"
+        android:layout_toRightOf="@+id/imageView">
+
+    </TextView>
+    <Button
+        android:id="@+id/removeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remove"
+        android:textSize="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/dateTextView"
+        android:visibility="invisible"
+        android:layout_toRightOf="@+id/imageView">
+
+    </Button>
+
+
+
+</RelativeLayout>
+
+
+
+</RelativeLayout>

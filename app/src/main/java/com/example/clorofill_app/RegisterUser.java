@@ -102,7 +102,7 @@ public class RegisterUser extends AppCompatActivity {
                                 email.setValue(mail);
                                 mno.setValue(mnumber);
                                 Passwordpath.setValue(password1);
-                                shareCount.setValue("0");
+                                shareCount.setValue(0);
                                 // passw2.setValue(pass2);
                                 Intent d = new Intent(RegisterUser.this, MainActivity.class);
                                 startActivity(d);

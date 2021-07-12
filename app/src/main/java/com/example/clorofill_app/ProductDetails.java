@@ -1,10 +1,15 @@
 package com.example.clorofill_app;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ProductDetails extends AppCompatActivity {
@@ -34,13 +41,42 @@ public class ProductDetails extends AppCompatActivity {
     FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     DatabaseReference getRef1,getRef2;
     String getItemName,getItemCount;
-
+    int qua;
+    int num;
+    int n;
+    String itemName,iName;
+    String getProductName,getProductPrice,getProductType,getProductQuantity,getProductDescription,getProductImage;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
+
+        SharedPreferences loginDetails =  getSharedPreferences("loginDetails", MODE_PRIVATE);
+        check_ID= loginDetails.getString("id","0");
+
+        getRef1 = FirebaseDatabase.getInstance().getReference("users/"+check_ID+"/itemsBoughtCount");
+        getRef1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                iName=snapshot.getKey();
+                Toast.makeText(ProductDetails.this, "iii+"+ iName, Toast.LENGTH_SHORT).show();
+                num =snapshot.getValue(Integer.class);
+
+                num=num+1;
+
+                Toast.makeText(ProductDetails.this, "iii+"+ n, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
+
+
 
 
         Bundle login = getIntent().getExtras();
@@ -49,8 +85,6 @@ public class ProductDetails extends AppCompatActivity {
             //  Toast.makeText(MainActivity.this,user, Toast.LENGTH_SHORT).show();
         }
 
-        SharedPreferences loginDetails =  getSharedPreferences("loginDetails", MODE_PRIVATE);
-        check_ID = loginDetails.getString("id","0");
 
 
         productNameTextView=(TextView)findViewById(R.id.productNameTextView);
@@ -78,17 +112,27 @@ public class ProductDetails extends AppCompatActivity {
                 }
 
 
-                    String getProductName=snapshot.child("name").getValue(String.class);
-                    String getProductPrice=snapshot.child("price").getValue(String.class);
-                    String getProductType=snapshot.child("type").getValue(String.class);
-                    String getProductQuantity=snapshot.child("quantity").getValue(String.class);
-                    String getProductDescription=snapshot.child("description").getValue(String.class);
-                    String getProductImage=snapshot.child("image").getValue(String.class);
+
+                getProductName=snapshot.child("name").getValue(String.class);
+                getProductPrice=snapshot.child("price").getValue(String.class);
+                getProductType=snapshot.child("type").getValue(String.class);
+                getProductQuantity=snapshot.child("quantity").getValue(String.class);
+                getProductDescription=snapshot.child("description").getValue(String.class);
+                getProductImage=snapshot.child("image").getValue(String.class);
 
 
                     SharedPreferences loginDetails =  getSharedPreferences("loginDetails", MODE_PRIVATE);
                     String type= loginDetails.getString("type","0");
 
+
+                Calendar c = Calendar.getInstance();
+                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");// HH:mm:ss");
+                String reg_date = df.format(c.getTime());
+            //    showtoast("Currrent Date Time : "+reg_date);
+
+                c.add(Calendar.DATE, 7);  // number of days to add
+                String end_date = df.format(c.getTime());
+             //   showtoast("end Time : "+end_date);
 
 
                 Picasso.get().load(getProductImage).fit().centerCrop().into(productImage);
@@ -97,6 +141,7 @@ public class ProductDetails extends AppCompatActivity {
                 totalAmountTextView.setText(getProductPrice);
                 descriptionTextView.setText(getProductDescription);
                 availableAmountTextView.setText(getProductQuantity);
+                deliveryTextView.setText(deliveryTextView.getText()+end_date);
               //  productNameTextView.setText(getProductName);
 
             }
@@ -113,56 +158,32 @@ public class ProductDetails extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                String itemName=productNameTextView.getText().toString();
+                SharedPreferences loginDetails =  getSharedPreferences("loginDetails", MODE_PRIVATE);
+               check_ID= loginDetails.getString("id","0");
+                String toAmount=amountEditText.getText().toString();
+                String toName=productNameTextView.getText().toString();
+                //   String chittyPaymentDate=shareamount.getText().toString();
 
-                getRef1 = FirebaseDatabase.getInstance().getReference("users/"+ check_ID+ "/cart");
-                getRef1.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        List<String> list=new ArrayList<String>();
-                        for (DataSnapshot dsp : snapshot.getChildren()){
-                            list.add(String.valueOf(dsp.getKey()));
-                        }
+                String fbChittynum="users/"+check_ID+"/cart/"+num;
+                String fbNum="users/"+check_ID+"/itemsBoughtCount";
+                String fbN=fbChittynum+"/itemName";
+                String fbQ=fbChittynum +"/quantity";
+                String fbI=fbChittynum +"/image";
+                String fbP=fbChittynum +"/price";
+                ;
 
-
-
-                        for(final String data:list){
-
-                            Toast.makeText(ProductDetails.this, data.toString(), Toast.LENGTH_SHORT).show();
-
-                            getItemName=snapshot.child(data).child("itemName").getValue(String.class);
-                          if(data.equals(itemName)){
-
-                                getItemCount=snapshot.child(data).child("quantity").getValue(String.class);
-                              Toast.makeText(ProductDetails.this, String.valueOf(getItemCount), Toast.LENGTH_SHORT).show();
-                          }
+                DatabaseReference mDbRef1 = mDatabase.getReference(fbN);
+                DatabaseReference mDbRef2 = mDatabase.getReference(fbQ);
+                DatabaseReference mDbRef3 = mDatabase.getReference(fbNum);
+                DatabaseReference mDbRef4 = mDatabase.getReference(fbI);
+                DatabaseReference mDbRef5 = mDatabase.getReference(fbP);
 
 
-                        }
-
-
-
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-
-
-
-                String cartPath="users/"+ check_ID+ "/cart/"+itemName;
-                String cartItemName="users/"+ check_ID+ "/cart/"+itemName+"/itemName";
-
-                DatabaseReference mDbRef1 = mDatabase.getReference(cartItemName);
-
-
-                mDbRef1.setValue(itemName);
-
-
+                mDbRef1.setValue(toName);
+                mDbRef2.setValue(toAmount);
+                mDbRef3.setValue(num);
+                mDbRef4.setValue(getProductImage);
+                mDbRef5.setValue(getProductPrice);
 
             }
         });
@@ -172,4 +193,15 @@ public class ProductDetails extends AppCompatActivity {
 
 
     }
+
+//    public  int callfn( ){
+//
+//
+//
+//
+//        return n;
+//
+//
+//    }
+
 }

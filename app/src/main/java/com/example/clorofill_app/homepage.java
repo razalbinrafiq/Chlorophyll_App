@@ -383,7 +383,11 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
     }
 
 
+ public void cart(){
 
+        Intent cart=new Intent(homepage.this,Cart.class);
+        startActivity(cart);
+ }
 
 
     public void logout(){
@@ -422,7 +426,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
                 Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
                 break;
 
-            case R.id.nav_mail:
+            case R.id.nav_mail:cart();
                 Toast.makeText(this, "mail_clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.Log:logout();

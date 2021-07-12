@@ -27,7 +27,7 @@
             <item
                 android:id="@+id/nav_mail"
 
-                android:title="Mail" />
+                android:title="Cart" />
 
         </menu>
     </item>
