@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -66,6 +67,26 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         setSupportActionBar(toolbars);
 
 
+        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation_homepage);
+        bottomNavigationView.setSelectedItemId(R.id.home);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()){
+
+                    case R.id.home:
+                        return true;
+                    case R.id.cart:
+                        startActivity(new Intent(getApplicationContext(),Cart.class));
+                        overridePendingTransition(0,0);
+                        finish();
+                        return true;
+                }
+                return false;
+            }
+        });
 
 
 

@@ -12,31 +12,47 @@
     tools:context=".homepage">
 
 
-
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       android:paddingTop="50dp"
-        android:id="@+id/scroll_view">
-
-        <LinearLayout
+        android:layout_height="wrap_content">
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:context=".homepage">
+            android:paddingTop="50dp"
+            android:layout_above="@+id/bottom_navigation_homepage"
+            android:id="@+id/scroll_view">
 
-
-            <androidx.recyclerview.widget.RecyclerView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#ffffff"
-                android:id="@+id/recyclerViewOfAdminActivity"/>
+                android:orientation="vertical"
+                tools:context=".homepage">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:id="@+id/recyclerViewOfAdminActivity"/>
 
 
 
 
-        </LinearLayout>
-    </ScrollView>
+            </LinearLayout>
+        </ScrollView>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottom_navigation_homepage"
+            android:layout_weight="2"
+            app:itemTextColor="@drawable/selector_cart"
+            app:itemIconTint="@drawable/selector_cart"
+            app:menu="@menu/menu_navigation_cart"
+            android:layout_alignParentBottom="true"/>
+
+
+    </RelativeLayout>
 
 
 
@@ -72,7 +88,10 @@
         </RelativeLayout>
 
 
-        <com.google.android.material.navigation.NavigationView
+
+
+
+    <com.google.android.material.navigation.NavigationView
             android:id="@+id/drawer"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

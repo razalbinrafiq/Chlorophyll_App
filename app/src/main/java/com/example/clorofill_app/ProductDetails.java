@@ -185,6 +185,13 @@ public class ProductDetails extends AppCompatActivity {
                 mDbRef4.setValue(getProductImage);
                 mDbRef5.setValue(getProductPrice);
 
+
+                Intent login=new Intent(ProductDetails.this,homepage.class);
+                login.putExtra("user_id",check_ID);
+                startActivity(login);
+                finish();
+
+
             }
         });
 

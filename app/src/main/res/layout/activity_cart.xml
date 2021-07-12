@@ -33,47 +33,59 @@
         </LinearLayout>
     </ScrollView>
 
-<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:id="@+id/bottom_navigation_cart"-->
-<!--        android:layout_weight="2"-->
-<!--        app:itemBackground="@color/white"-->
-<!--        app:itemTextColor="@drawable/selector_cart"-->
-<!--        app:itemIconTint="@drawable/selector_cart"-->
-<!--        app:menu="@menu/menu_navigation_cart"-->
-<!-- -->
-<!--        android:layout_alignParentBottom="true"/>-->
-
+<LinearLayout
+    android:id="@+id/buyLinear"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:orientation="vertical">
     <LinearLayout
-        android:id="@+id/buyLinear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:orientation="horizontal"
         android:weightSum="2"
-        android:layout_alignParentBottom="true">
+       >
 
         <TextView
             android:id="@+id/totalAmountTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-black"
+            android:fontFamily="@font/aclonica"
             android:text="AMOUNT"
             android:textColor="#040303"
             android:textSize="24sp">
 
         </TextView>
+
         <Button
             android:id="@+id/buyButton"
-            android:layout_width="wrap_content"
+            android:layout_width="44dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
             android:layout_weight="1"
             android:text="BUY NOW">
 
         </Button>
 
     </LinearLayout>
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_navigation_homepage"
+        android:layout_weight="2"
+        android:background="@color/black"
+        app:itemTextColor="@drawable/selector_cart"
+        app:itemIconTint="@drawable/selector_cart"
+        app:menu="@menu/menu_navigation_cart"
+        android:layout_alignParentBottom="true"/>
+</LinearLayout>
+
+
+
+
 
 </RelativeLayout>

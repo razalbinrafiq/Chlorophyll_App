@@ -45,9 +45,9 @@ public class AdapterOfHomePage extends RecyclerView.Adapter<AdapterOfHomePage.Vi
         // holder.nameTextView.setBackgroundColor(255);
 
         if(Integer.parseInt(number.toString())%2==0)
-            holder.itemView.setBackgroundColor(Color.parseColor("#92b39f"));
+            holder.itemView.setBackgroundColor(Color.parseColor("#c7feff"));
         else
-            holder.itemView.setBackgroundColor(Color.parseColor("#5db07e"));
+            holder.itemView.setBackgroundColor(Color.parseColor("#e8ebeb"));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
