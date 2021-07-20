@@ -126,10 +126,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         forgotpasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent forgotIntent=new Intent(MainActivity.this,ForgotPassword.class);
+                forgotIntent.putExtra("user_id",user_id);
+                finish();
+                startActivity(forgotIntent);
 
             }
         });
