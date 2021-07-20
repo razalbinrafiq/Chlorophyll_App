@@ -411,6 +411,14 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
  }
 
 
+    public void settings(){
+
+        Intent login=new Intent(homepage.this,UserProfile.class);
+        finish();
+        startActivity(login);
+        System.exit(0);
+
+    }
     public void logout(){
 
         SharedPreferences loginDetails = getSharedPreferences("loginDetails", MODE_PRIVATE);
@@ -447,8 +455,11 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
                 Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
                 break;
 
-            case R.id.nav_mail:cart();
+            case R.id.nav_mail:settings();
                 Toast.makeText(this, "mail_clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.my_orders:settings();
+                Toast.makeText(this, "my_Orders clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.Log:logout();
 

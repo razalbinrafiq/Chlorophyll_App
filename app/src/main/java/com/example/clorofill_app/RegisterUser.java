@@ -103,7 +103,7 @@ public class RegisterUser extends AppCompatActivity {
                                 String emailid = details + "/" + "emailId";
                                 String num = details + "/" + "mobile";
                                 String passwordpath = details + "/" + "password1";
-                                String addHN = details + "/" + "addressHouseNAme";
+                                String addHN = details + "/" + "addressHouseName";
                                 String addC = details + "/" + "addressCity";
                                 String addA = details + "/" + "addressArea";
                                 String addP = details + "/" + "addressPin";

@@ -28,6 +28,10 @@
                 android:id="@+id/nav_mail"
 
                 android:title="Settings" />
+            <item
+                android:id="@+id/my_orders"
+
+                android:title="My Orders" />
 
         </menu>
     </item>

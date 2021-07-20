@@ -46,6 +46,8 @@ public class Cart extends AppCompatActivity {
     String orderCountString;
     int orderCountInt;
 
+    String idString,nameString,emailString,phoneString,addHN,addA,addC,addP;
+
     TextView totalAmountTextView;
     Button buyButton;
 
@@ -60,6 +62,39 @@ public class Cart extends AppCompatActivity {
         check_ID= loginDetails.getString("id","0");
         totalAmountTextView=(TextView)findViewById(R.id.totalAmountTextView);
         buyButton=(Button) findViewById(R.id.buyButton);
+
+
+
+        DatabaseReference fb_to_read = FirebaseDatabase.getInstance().getReference("users/"+check_ID+"/userDetails");
+
+        fb_to_read.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> list=new ArrayList<String>();
+                for (DataSnapshot dsp : snapshot.getChildren()){
+                    idString=snapshot.getKey().toString();
+                }
+
+                nameString=snapshot.child("name").getValue(String.class).toUpperCase();
+                emailString=snapshot.child("emailId").getValue(String.class);
+                phoneString=snapshot.child("mobile").getValue(String.class);
+
+                addHN=snapshot.child("addressHouseName").getValue(String.class);
+                addA=snapshot.child("addressArea").getValue(String.class);
+                addC=snapshot.child("addressCity").getValue(String.class);
+                addP=snapshot.child("addressPin").getValue(String.class);
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
 
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation_homepage);
@@ -114,7 +149,13 @@ public class Cart extends AppCompatActivity {
                 String fbPath="order/list/" + orderCountInt;
                 String fbOrderCount="order/orderCount";
                 String fbName=fbPath+"/name";
+                String fbAddressHN=fbPath+"/addressHouseName";
+                String fbAddressCity=fbPath+"/addressCity";
+                String fbAddressArea=fbPath+"/addressArea";
+                String fbAddressPin=fbPath+"/addressPin";
+                String fbStatus=fbPath+"/bookingStatus";
                 String fbOP=fbPath+"/orders";
+                String orders="users/"+check_ID+"/myOrders/"+orderCountInt;
 
 
                    // String fb=fbPath+"/name";
@@ -124,6 +165,12 @@ public class Cart extends AppCompatActivity {
                 DatabaseReference mDbRef0 = mDatabase.getReference(fbOrderCount);
                 DatabaseReference mDbRef1 = mDatabase.getReference(fbName);
                 DatabaseReference mDbRef2 = mDatabase.getReference(fbOP);
+                DatabaseReference mDbRef7 = mDatabase.getReference(fbAddressHN);
+                DatabaseReference mDbRef8 = mDatabase.getReference(fbAddressArea);
+                DatabaseReference mDbRef9 = mDatabase.getReference(fbAddressCity);
+                DatabaseReference mDbRef10 = mDatabase.getReference(fbAddressPin);
+                DatabaseReference mDbRef11 = mDatabase.getReference(fbStatus);
+                DatabaseReference mDbRef12 = mDatabase.getReference(orders);
 
 
 
@@ -197,7 +244,18 @@ public class Cart extends AppCompatActivity {
 
                 mDbRef0.setValue(orderCountInt);
                 mDbRef1.setValue(String.valueOf(check_ID));
+                mDbRef7.setValue(String.valueOf(addHN));
+                mDbRef8.setValue(String.valueOf(addA));
+                mDbRef9.setValue(String.valueOf(addC));
+                mDbRef10.setValue(String.valueOf(addP));
+                mDbRef11.setValue("Booked");
+                mDbRef12.setValue(orderCountInt);
 
+
+
+                Intent back=new Intent(Cart.this, homepage.class);
+                finish();
+                startActivity(back);
 
             }
         });
