@@ -64,20 +64,8 @@ public class AdapterOfMyOrders extends RecyclerView.Adapter<AdapterOfMyOrders.Vi
             }
         });
 
-        holder.shareIdTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Context u=holder.itemView.getContext();
 
-                SharedPreferences loginDetails = u.getSharedPreferences("loginDetails", Context.MODE_PRIVATE);
-                String check_ID= loginDetails.getString("id","0");
-
-                DatabaseReference fb_to_read = FirebaseDatabase.getInstance().getReference("users/"+check_ID+"/cart/"+shareId);
-                fb_to_read.getRef().removeValue();
-                Toast.makeText(u, shareId, Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        holder.shareIdTextView.setText(id);
 
 
 

@@ -146,33 +146,6 @@ public class Cart extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String fbPath="order/list/" + orderCountInt;
-                String fbOrderCount="order/orderCount";
-                String fbName=fbPath+"/name";
-                String fbAddressHN=fbPath+"/addressHouseName";
-                String fbAddressCity=fbPath+"/addressCity";
-                String fbAddressArea=fbPath+"/addressArea";
-                String fbAddressPin=fbPath+"/addressPin";
-                String fbStatus=fbPath+"/bookingStatus";
-                String fbOP=fbPath+"/orders";
-                String orders="users/"+check_ID+"/myOrders/"+orderCountInt;
-
-
-                   // String fb=fbPath+"/name";
-                  //  String fb=fbPath+"/name";
-
-
-                DatabaseReference mDbRef0 = mDatabase.getReference(fbOrderCount);
-                DatabaseReference mDbRef1 = mDatabase.getReference(fbName);
-                DatabaseReference mDbRef2 = mDatabase.getReference(fbOP);
-                DatabaseReference mDbRef7 = mDatabase.getReference(fbAddressHN);
-                DatabaseReference mDbRef8 = mDatabase.getReference(fbAddressArea);
-                DatabaseReference mDbRef9 = mDatabase.getReference(fbAddressCity);
-                DatabaseReference mDbRef10 = mDatabase.getReference(fbAddressPin);
-                DatabaseReference mDbRef11 = mDatabase.getReference(fbStatus);
-                DatabaseReference mDbRef12 = mDatabase.getReference(orders);
-
-
 
 
                 DatabaseReference fb_to_read = FirebaseDatabase.getInstance().getReference("users/"+check_ID+"/cart");
@@ -188,6 +161,38 @@ public class Cart extends AppCompatActivity {
 
                         for(final String data:list){
 
+
+
+
+
+                            String fbPath="order/list/" + orderCountInt;
+                            String fbOrderCount="order/orderCount";
+                            String fbName=fbPath+"/name";
+                            String fbAddressHN=fbPath+"/addressHouseName";
+                            String fbAddressCity=fbPath+"/addressCity";
+                            String fbAddressArea=fbPath+"/addressArea";
+                            String fbAddressPin=fbPath+"/addressPin";
+                            String fbStatus=fbPath+"/bookingStatus";
+                            String fbImage=fbPath+"/image";
+                            String fbOP=fbPath+"/orders";
+                            String orders="users/"+check_ID+"/myOrders/"+orderCountInt;
+
+                            DatabaseReference mDbRef0 = mDatabase.getReference(fbOrderCount);
+                            DatabaseReference mDbRef1 = mDatabase.getReference(fbName);
+                            DatabaseReference mDbRef2 = mDatabase.getReference(fbOP);
+                            DatabaseReference mDbRef7 = mDatabase.getReference(fbAddressHN);
+                            DatabaseReference mDbRef8 = mDatabase.getReference(fbAddressArea);
+                            DatabaseReference mDbRef9 = mDatabase.getReference(fbAddressCity);
+                            DatabaseReference mDbRef10 = mDatabase.getReference(fbAddressPin);
+                            DatabaseReference mDbRef11 = mDatabase.getReference(fbStatus);
+                            DatabaseReference mDbRef12 = mDatabase.getReference(orders);
+                            DatabaseReference mDbRef13 = mDatabase.getReference(fbImage);
+
+
+
+
+
+
                             getItemName=snapshot.child(data).child("itemName").getValue(String.class).toUpperCase();
                             getItemQuantity=snapshot.child(data).child("quantity").getValue(String.class);
                             getItemImage=snapshot.child(data).child("image").getValue(String.class);
@@ -198,22 +203,38 @@ public class Cart extends AppCompatActivity {
 //                    String getShareType=snapshot.child(data).child("typeOfShop").getValue(String.class);
 //
 //                    if(getShareType.equals("Others")) {
-                            i++;
+                        //    i++;
                             String fbNum=fbOP+"/"+data;
-                            String fbItem=fbNum+"/item";
-                            String fbQuantity=fbNum+"/quantity";
-                            String fbPrice=fbNum+"/price";
+                            String fbItem=fbPath+"/item";
+                            String fbQuantity=fbPath+"/quantity";
+                            String fbPrice=fbPath+"/price";
 
-                            DatabaseReference mDbRef3 = mDatabase.getReference(fbNum);
+                           // DatabaseReference mDbRef3 = mDatabase.getReference(fbNum);
                             DatabaseReference mDbRef4 = mDatabase.getReference(fbItem);
                             DatabaseReference mDbRef5 = mDatabase.getReference(fbQuantity);
                             DatabaseReference mDbRef6 = mDatabase.getReference(fbPrice);
 
                            // mDbRef2.setValue();
                            // mDbRef3.setValue();
+
+
+                            mDbRef0.setValue(orderCountInt);
+                            mDbRef1.setValue(String.valueOf(check_ID));
+                            mDbRef7.setValue(String.valueOf(addHN));
+                            mDbRef8.setValue(String.valueOf(addA));
+                            mDbRef9.setValue(String.valueOf(addC));
+                            mDbRef10.setValue(String.valueOf(addP));
+                            mDbRef11.setValue("Booked");
+                            mDbRef12.setValue(orderCountInt);
+                            mDbRef13.setValue(getItemImage);
+
+
+
                             mDbRef4.setValue(getItemName);
                             mDbRef5.setValue(getItemQuantity);
                             mDbRef6.setValue(getItemPrice);
+
+                            orderCountInt=orderCountInt-1;
 
                             DatabaseReference fb_to_read = FirebaseDatabase.getInstance().getReference("users/"+check_ID+"/cart/"+data);
                             fb_to_read.getRef().removeValue();
@@ -242,14 +263,14 @@ public class Cart extends AppCompatActivity {
 
 
 
-                mDbRef0.setValue(orderCountInt);
-                mDbRef1.setValue(String.valueOf(check_ID));
-                mDbRef7.setValue(String.valueOf(addHN));
-                mDbRef8.setValue(String.valueOf(addA));
-                mDbRef9.setValue(String.valueOf(addC));
-                mDbRef10.setValue(String.valueOf(addP));
-                mDbRef11.setValue("Booked");
-                mDbRef12.setValue(orderCountInt);
+//                mDbRef0.setValue(orderCountInt);
+//                mDbRef1.setValue(String.valueOf(check_ID));
+//                mDbRef7.setValue(String.valueOf(addHN));
+//                mDbRef8.setValue(String.valueOf(addA));
+//                mDbRef9.setValue(String.valueOf(addC));
+//                mDbRef10.setValue(String.valueOf(addP));
+//                mDbRef11.setValue("Booked");
+//                mDbRef12.setValue(orderCountInt);
 
 
 
