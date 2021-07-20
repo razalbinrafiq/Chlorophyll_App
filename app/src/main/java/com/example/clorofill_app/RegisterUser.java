@@ -23,7 +23,9 @@ public class RegisterUser extends AppCompatActivity {
 
 
     TextView Name,Password1,Password2,email_id,number,User;
+    TextView addressHouseName,addressCity,addressArea,addressPin;
     String name,password1,password2,mail,mnumber,username;
+    String aHouseName,aCity,aArea,aPin;
     List<String> list=new ArrayList<String>();
     int f=0;
 
@@ -61,12 +63,25 @@ public class RegisterUser extends AppCompatActivity {
                 User = (TextView) findViewById(R.id.userid);
                 number = (TextView) findViewById(R.id.mobile_no);
 
+
+                addressArea= (TextView) findViewById(R.id.addressArea);
+                addressCity= (TextView) findViewById(R.id.addressCity);
+                addressHouseName = (TextView) findViewById(R.id.addressHouseName);
+                addressPin= (TextView) findViewById(R.id.addressPin);
+
+
                 name = Name.getText().toString();
                 username = User.getText().toString();
                 password1 = Password1.getText().toString();
                 password2 = Password2.getText().toString();
                 mail = email_id.getText().toString();
                 mnumber = number.getText().toString();
+
+                aHouseName=addressHouseName.getText().toString();
+                aCity=addressCity.getText().toString();
+                aArea=addressArea.getText().toString();
+                aPin=addressPin.getText().toString();
+
                 FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
                 String user_id = "users";
                 // DatabaseReference uid = mDatabase.getReference(user_id);
@@ -88,6 +103,10 @@ public class RegisterUser extends AppCompatActivity {
                                 String emailid = details + "/" + "emailId";
                                 String num = details + "/" + "mobile";
                                 String passwordpath = details + "/" + "password1";
+                                String addHN = details + "/" + "addressHouseNAme";
+                                String addC = details + "/" + "addressCity";
+                                String addA = details + "/" + "addressArea";
+                                String addP = details + "/" + "addressPin";
                                 //String password2=details+"/"+"password2";
 
                                 DatabaseReference Agentname = mDatabase.getReference(agentname);
@@ -96,6 +115,10 @@ public class RegisterUser extends AppCompatActivity {
                                 DatabaseReference Passwordpath = mDatabase.getReference(passwordpath);
                                 DatabaseReference shareCount = mDatabase.getReference( user_id + "/" + username + "/itemsBoughtCount");
 
+                                DatabaseReference aHN=mDatabase.getReference(addHN);
+                                DatabaseReference aC=mDatabase.getReference(addC);
+                                DatabaseReference aA=mDatabase.getReference(addA);
+                                DatabaseReference aP=mDatabase.getReference(addP);
                                 //DatabaseReference passw2 = mDatabase.getReference(password2);
 
                                 Agentname.setValue(name);
@@ -103,6 +126,13 @@ public class RegisterUser extends AppCompatActivity {
                                 mno.setValue(mnumber);
                                 Passwordpath.setValue(password1);
                                 shareCount.setValue(0);
+
+                                aHN.setValue(aHouseName);
+                                aA.setValue(aArea);
+                                aC.setValue(aCity);
+                                aP.setValue(aPin);
+
+
                                 // passw2.setValue(pass2);
                                 Intent d = new Intent(RegisterUser.this, MainActivity.class);
                                 startActivity(d);
