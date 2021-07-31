@@ -56,6 +56,8 @@ public class AdapterOfHomePage extends RecyclerView.Adapter<AdapterOfHomePage.Vi
                 Context u=holder.itemView.getContext();
                 Intent iu=new Intent(u,ProductDetails.class);
                 iu.putExtra("name",name);
+
+                ((homepage)u).finish();
                 u.startActivity(iu);
                 //Toast.makeText(u, holder.shareIdTextView.getText(), Toast.LENGTH_SHORT).show();
             }

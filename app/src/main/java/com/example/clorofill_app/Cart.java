@@ -68,7 +68,7 @@ public class Cart extends AppCompatActivity {
 
         DatabaseReference fb_to_read = FirebaseDatabase.getInstance().getReference("users/"+check_ID+"/userDetails");
 
-        fb_to_read.addValueEventListener(new ValueEventListener() {
+        fb_to_read.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<String> list=new ArrayList<String>();
@@ -122,7 +122,7 @@ public class Cart extends AppCompatActivity {
 
 
         getRef1 = FirebaseDatabase.getInstance().getReference("order/orderCount");
-        getRef1.addValueEventListener(new ValueEventListener() {
+        getRef1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                String iName=snapshot.getKey();
@@ -151,7 +151,7 @@ public class Cart extends AppCompatActivity {
 
                 DatabaseReference fb_to_read = FirebaseDatabase.getInstance().getReference("users/"+check_ID+"/cart");
 
-                fb_to_read.addValueEventListener(new ValueEventListener() {
+                fb_to_read.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -324,7 +324,7 @@ public class Cart extends AppCompatActivity {
 
         DatabaseReference fb_to_read = FirebaseDatabase.getInstance().getReference("users/"+check_ID+"/cart");
 
-        fb_to_read.addValueEventListener(new ValueEventListener() {
+        fb_to_read.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 

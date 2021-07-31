@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
@@ -129,7 +130,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
 
         DatabaseReference fb_to_read = FirebaseDatabase.getInstance().getReference("product");
 
-        fb_to_read.addValueEventListener(new ValueEventListener() {
+        fb_to_read.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -217,7 +218,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
 
         DatabaseReference fb_to_read = FirebaseDatabase.getInstance().getReference("product");
 
-        fb_to_read.addValueEventListener(new ValueEventListener() {
+        fb_to_read.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -301,7 +302,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
 
         DatabaseReference fb_to_read = FirebaseDatabase.getInstance().getReference("product");
 
-        fb_to_read.addValueEventListener(new ValueEventListener() {
+        fb_to_read.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -356,7 +357,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
 
         DatabaseReference fb_to_read = FirebaseDatabase.getInstance().getReference("product");
 
-        fb_to_read.addValueEventListener(new ValueEventListener() {
+        fb_to_read.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -407,6 +408,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
  public void cart(){
 
         Intent cart=new Intent(homepage.this,Cart.class);
+        finish();
         startActivity(cart);
  }
 
@@ -477,4 +479,33 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
+
+
+
+    private Boolean exit = false;
+    @Override
+    public void onBackPressed() {
+        if (exit) {
+            finish();
+            System.exit(0);// finish activity
+        } else {
+            Toast.makeText(this, "Press Back again to Exit.",
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
+        }
+
+    }
 }
+
+
+

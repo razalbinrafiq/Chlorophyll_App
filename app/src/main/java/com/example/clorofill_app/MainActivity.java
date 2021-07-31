@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
                 user_id=username.getText().toString();
                 DatabaseReference fb_to_read = FirebaseDatabase.getInstance().getReference("users");
-                fb_to_read.addValueEventListener(new ValueEventListener() {
+                fb_to_read.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         List<String> list=new ArrayList<String>();

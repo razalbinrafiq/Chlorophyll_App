@@ -66,7 +66,7 @@ public class log extends  AppCompatActivity {
                     {
                         DatabaseReference fb_to_read = FirebaseDatabase.getInstance().getReference("users");
 
-                        fb_to_read.addValueEventListener(new ValueEventListener() {
+                        fb_to_read.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 List<String> list=new ArrayList<String>();
@@ -79,7 +79,7 @@ public class log extends  AppCompatActivity {
                                     {
                                         password=check_Password;
                                         DatabaseReference fb_read = FirebaseDatabase.getInstance().getReference("users"+"/"+user_id+"/"+"userDetails"+"/"+"password1");
-                                        fb_read.addValueEventListener(new ValueEventListener() {
+                                        fb_read.addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                 String pass=snapshot.getValue(String.class);
