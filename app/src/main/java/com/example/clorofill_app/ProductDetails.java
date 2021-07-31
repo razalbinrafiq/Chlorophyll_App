@@ -61,12 +61,12 @@ public class ProductDetails extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 iName=snapshot.getKey();
-                Toast.makeText(ProductDetails.this, "iii+"+ iName, Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(ProductDetails.this, "iii+"+ iName, Toast.LENGTH_SHORT).show();
                 num =snapshot.getValue(Integer.class);
 
                 num=num+1;
 
-                Toast.makeText(ProductDetails.this, "iii+"+ n, Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(ProductDetails.this, "iii+"+ n, Toast.LENGTH_SHORT).show();
             }
 
             @Override

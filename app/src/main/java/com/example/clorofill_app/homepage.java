@@ -449,25 +449,25 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
 
         switch (item.getItemId()){
             case R.id.nav_khome:initData("1,","2","2,3","4,","5","67");
-                Toast.makeText(this, "clicked here", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
 
                 break;
             case R.id.nav_farmers_registration:fertilizers("1,","2","2,3","4,","5","67");
-                Toast.makeText(this, "mail_clicked second irem", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Clicked  ", Toast.LENGTH_SHORT).show();
                break;
 
             case R.id.nav_profile:plants("1,","2","2,3","4,","5","67");
-                Toast.makeText(this, "clicked here", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Clicked here", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_product_to_sell:seeds("1,","2","2,3","4,","5","67");
-                Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.nav_mail:settings();
-                Toast.makeText(this, "mail_clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.my_orders:myOrders();
-                Toast.makeText(this, "my_Orders clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.Log:logout();
 

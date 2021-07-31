@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -125,12 +126,12 @@ public class Cart extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                String iName=snapshot.getKey();
-                Toast.makeText(Cart.this, "iii+"+ iName, Toast.LENGTH_SHORT).show();
+        //        Toast.makeText(Cart.this, "iii+"+ iName, Toast.LENGTH_SHORT).show();
                 orderCountInt =snapshot.getValue(Integer.class);
 
                 orderCountInt=orderCountInt-1;
 
-                Toast.makeText(Cart.this, "iii+"+ orderCountInt, Toast.LENGTH_SHORT).show();
+        //        Toast.makeText(Cart.this, "iii+"+ orderCountInt, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -208,11 +209,24 @@ public class Cart extends AppCompatActivity {
                             String fbItem=fbPath+"/item";
                             String fbQuantity=fbPath+"/quantity";
                             String fbPrice=fbPath+"/price";
+                            String fbDate=fbPath+"/orderedDate";
+                            String fbID=fbPath+"/orderedID";
+
+                            Calendar c = Calendar.getInstance();
+                            SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");// HH:mm:ss");
+                            String reg_date = df.format(c.getTime());
+                            //    showtoast("Currrent Date Time : "+reg_date);
+
+                            c.add(Calendar.DATE, 0);  // number of days to add
+                            String end_date = df.format(c.getTime());
+                            //   showtoast("end Time : "+end_date);
 
                            // DatabaseReference mDbRef3 = mDatabase.getReference(fbNum);
                             DatabaseReference mDbRef4 = mDatabase.getReference(fbItem);
                             DatabaseReference mDbRef5 = mDatabase.getReference(fbQuantity);
                             DatabaseReference mDbRef6 = mDatabase.getReference(fbPrice);
+                            DatabaseReference mDbRef14 = mDatabase.getReference(fbDate);
+                            DatabaseReference mDbRef15 = mDatabase.getReference(fbID);
 
                            // mDbRef2.setValue();
                            // mDbRef3.setValue();
@@ -227,6 +241,8 @@ public class Cart extends AppCompatActivity {
                             mDbRef11.setValue("Booked");
                             mDbRef12.setValue(orderCountInt);
                             mDbRef13.setValue(getItemImage);
+                            mDbRef14.setValue(reg_date);
+                            mDbRef15.setValue(orderCountInt);
 
 
 
